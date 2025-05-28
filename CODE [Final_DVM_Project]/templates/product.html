@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trang sản phẩm - Đồ bơi thiết kế riêng</title>
+  <style>
+    /* Header Styles */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #ffffff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+    }
+
+    header a {
+      text-decoration: none;
+      color: #2c3e50;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    header a:hover {
+      color: #3498db;
+    }
+
+    header nav a {
+      margin: 0 15px;
+      font-size: 16px;
+    }
+
+    header input[type="text"] {
+      padding: 8px 15px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    header input[type="text"]:focus {
+      border-color: #3498db;
+    }
+
+    header select {
+      padding: 5px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    .container { max-width: 1200px; margin: auto; padding: 20px; }
+
+    /* Product Overview */
+    .product-overview { display: flex; flex-wrap: wrap; gap: 20px; }
+    .product-images, .product-details { flex: 1; min-width: 300px; }
+    .product-images img.main-img { width: 100%; border-radius: 8px; }
+    .thumbnail-gallery { display: flex; gap: 10px; margin-top: 10px; }
+    .thumbnail-gallery img { width: 60px; height: 60px; object-fit: cover; border-radius: 4px; cursor: pointer; }
+
+    .product-details h1 { font-size: 24px; }
+    .price { color: red; font-weight: bold; font-size: 20px; }
+    .old-price { text-decoration: line-through; color: gray; margin-left: 10px; }
+    .colors, .sizes, .quantity { margin-top: 10px; }
+    .colors span, .sizes button { margin-right: 10px; cursor: pointer; }
+    .buy-buttons button { margin: 10px 10px 10px 0; padding: 10px 20px; cursor: pointer; }
+    .delivery-info { margin-top: 10px; font-size: 14px; color: gray; }
+
+    /* Tabs */
+    .tabs { margin-top: 40px; }
+    .tab-buttons { display: flex; gap: 10px; cursor: pointer; margin-bottom: 10px; }
+    .tab-buttons div { padding: 10px 20px; background: #eee; border-radius: 5px; }
+    .tab-buttons .active { background: #ccc; }
+    .tab-content > div { display: none; }
+    .tab-content > div.active { display: block; padding: 10px 0; }
+
+    /* Reviews */
+    .reviews { margin-top: 40px; }
+    .review-item { border-bottom: 1px solid #ccc; padding: 10px 0; }
+
+    /* Related Products */
+    .related-products { margin-top: 40px; }
+    .product-grid { display: flex; gap: 20px; flex-wrap: wrap; }
+    .product-card { width: 200px; border: 1px solid #ddd; border-radius: 8px; padding: 10px; }
+    .product-card img { width: 100%; border-radius: 5px; }
+
+    /* Custom Design */
+    .custom-design { margin-top: 40px; background: #f8f8f8; padding: 20px; border-radius: 8px; }
+
+    /* Footer */
+    footer { text-align: center; padding: 20px; background: #333; color: white; margin-top: 40px; }
+
+    @media (max-width: 768px) {
+      .product-overview { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+      <div><a href="/"><strong>LOGO</strong></a></div>
+      <input type="text" placeholder="Tìm kiếm..." />
+      <nav>
+      <a href="/">Trang chủ</a>
+      <a href="{{ url_for('custom_page') }}">Thiết kế riêng</a>
+      <a href="{{ url_for('lookbook') }}">Lookbook</a>
+      <a href="{{ url_for('contact') }}">Liên hệ</a>
+      </nav>
+
+      <div>
+      🛒 <a href="{{ url_for('cart') }}">Giỏ hàng</a> |
+      👤 <a href="/account">Tài khoản</a> |
+      <a href="{{ url_for('language') }}">Ngôn ngữ</a> |
+      🌐 <select><option>VNĐ</option><option>USD</option></select>
+      </div>
+  </header>
+
+  <div class="container">
+    <!-- 1. Product Overview -->
+    <div class="product-overview">
+      <div class="product-images">
+        <img src="main.jpg" alt="Sản phẩm" class="main-img">
+        <div class="thumbnail-gallery">
+          <img src="thumb1.jpg" alt="Thumb1">
+          <img src="thumb2.jpg" alt="Thumb2">
+        </div>
+      </div>
+      <div class="product-details">
+        <h1>Đồ bơi thiết kế phong cách Hawaii</h1>
+        <div class="price">550.000₫ <span class="old-price">650.000₫</span></div>
+
+        <div class="colors">
+          <strong>Màu sắc:</strong>
+          <span style="background:red;width:20px;height:20px;display:inline-block;border-radius:50%;"></span>
+          <span style="background:blue;width:20px;height:20px;display:inline-block;border-radius:50%;"></span>
+        </div>
+
+        <div class="sizes">
+          <strong>Size:</strong>
+          <button>S</button><button>M</button><button>L</button>
+          <a href="#">Hướng dẫn chọn size</a>
+        </div>
+
+        <div class="quantity">
+          <strong>Số lượng:</strong>
+          <input type="number" value="1" min="1" style="width:50px;">
+        </div>
+
+        <div class="buy-buttons">
+          <button>🛒 Thêm vào giỏ</button>
+          <button>⚡ Mua ngay</button>
+          <button>✏️ Tùy chỉnh thiết kế</button>
+        </div>
+
+        <div class="delivery-info">
+          🚚 Giao hàng miễn phí toàn quốc. Đổi trả trong 7 ngày.
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Tabs Mô tả -->
+    <div class="tabs">
+      <div class="tab-buttons">
+        <div class="active">🧵 Mô tả</div>
+        <div>📐 Thông số</div>
+        <div>🧺 Bảo quản</div>
+        <div>🌎 Xuất xứ</div>
+        <div>🛡️ Chính sách</div>
+      </div>
+      <div class="tab-content">
+        <div class="active">Đồ bơi phong cách Hawaii, chất liệu co giãn 4 chiều, mềm mịn.</div>
+        <div>Size S: 40-45kg | M: 45-55kg | L: 55-65kg...</div>
+        <div>Giặt tay với nước lạnh, không phơi nắng gắt.</div>
+        <div>Thiết kế tại Việt Nam, sản xuất tại xưởng độc quyền.</div>
+        <div>Đổi trả trong 7 ngày nếu sản phẩm lỗi do nhà sản xuất.</div>
+      </div>
+    </div>
+
+    <!-- 3. Reviews -->
+    <div class="reviews">
+      <h2>⭐ Đánh giá sản phẩm</h2>
+      <div class="review-item">
+        <strong>Nguyễn Lan</strong> - ⭐⭐⭐⭐⭐ <br>
+        Chất vải đẹp, form chuẩn, mình rất thích!
+      </div>
+      <form>
+        <h3>Gửi đánh giá</h3>
+        <input type="text" placeholder="Tên bạn"><br>
+        <textarea placeholder="Nhận xét"></textarea><br>
+        <button>Gửi</button>
+      </form>
+    </div>
+
+    <!-- 4. Related Products -->
+    <div class="related-products">
+      <h2>🎁 Bạn có thể thích</h2>
+      <div class="product-grid">
+        <div class="product-card">
+          <img src="product1.jpg" alt="Product">
+          <h4>Đồ bơi kẻ sọc</h4>
+          <p>450.000₫</p>
+          <button>Thêm vào giỏ</button>
+        </div>
+        <div class="product-card">
+          <img src="product2.jpg" alt="Product">
+          <h4>Đồ bơi 2 mảnh</h4>
+          <p>520.000₫</p>
+          <button>Thêm vào giỏ</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Custom Design Block -->
+    <div class="custom-design">
+      <h2>🎨 Thiết kế đồ bơi riêng</h2>
+      <p>Chọn kiểu dáng, màu sắc, cá nhân hóa theo sở thích của bạn.</p>
+      <button>Xem thử thiết kế</button>
+      <button>Gửi yêu cầu</button>
+    </div>
+  </div>
+
+  <!-- 6. Footer -->
+  <footer>
+    &copy; 2025 Đồ bơi thiết kế riêng. Liên hệ: contact@example.com
+  </footer>
+</body>
+</html>

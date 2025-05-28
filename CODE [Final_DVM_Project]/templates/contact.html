@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liên hệ - Đồ bơi thiết kế riêng</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background-color: #fdfdfd;
+      color: #333;
+    }
+    /* Header Styles */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #ffffff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+    }
+
+    header a {
+      text-decoration: none;
+      color: #2c3e50;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    header a:hover {
+      color: #3498db;
+    }
+
+    header nav a {
+      margin: 0 15px;
+      font-size: 16px;
+    }
+
+    header input[type="text"] {
+      padding: 8px 15px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    header input[type="text"]:focus {
+      border-color: #3498db;
+    }
+
+    header select {
+      padding: 5px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding: 2rem;
+    }
+    .contact-info, .contact-form {
+      flex: 1;
+      min-width: 300px;
+    }
+    .contact-info ul {
+      list-style: none;
+      padding: 0;
+    }
+    .contact-info li {
+      margin-bottom: 1rem;
+    }
+    .contact-info li::before {
+      content: '📌';
+      margin-right: 0.5rem;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    form input, form select, form textarea {
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    form button {
+      background-color: #ff6f61;
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .map {
+      margin: 2rem;
+    }
+    .chat-widget {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+    .chat-widget button {
+      padding: 0.5rem 1rem;
+      border: none;
+      background-color: #006aff;
+      color: white;
+      border-radius: 50px;
+      cursor: pointer;
+      margin-bottom: 0.5rem;
+    }
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .chat-widget {
+        right: 10px;
+        bottom: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- Header -->
+  <header>
+      <div><a href="/"><strong>LOGO</strong></a></div>
+      <input type="text" placeholder="Tìm kiếm..." />
+      <nav>
+      <a href="/">Trang chủ</a>
+      <a href="{{ url_for('custom_page') }}">Thiết kế riêng</a>
+      <a href="{{ url_for('lookbook') }}">Lookbook</a>
+      <a href="{{ url_for('contact') }}">Liên hệ</a>
+      </nav>
+
+      <div>
+      🛒 <a href="{{ url_for('cart') }}">Giỏ hàng</a> |
+      👤 <a href="/account">Tài khoản</a> |
+      <a href="{{ url_for('language') }}">Ngôn ngữ</a> |
+      🌐 <select><option>VNĐ</option><option>USD</option></select>
+      </div>
+  </header>
+  <h1>
+   
+    
+  </h1>
+
+  <div class="container">
+    <div class="contact-info">
+      <h2>Thông tin liên hệ</h2>
+      <ul>
+        <li>📍 123 Đường ABC, Q.1, TP.HCM</li>
+        <li>📧 support@doboi.vn</li>
+        <li>☎️ 0909 999 999 (Zalo/Viber)</li>
+        <li>⏰ Thứ 2 - Thứ 7 | 8:00 - 17:00</li>
+        <li>🔗 <a href="#">Facebook</a> | <a href="#">Instagram</a> | <a href="#">TikTok</a></li>
+      </ul>
+    </div>
+
+    <div class="contact-form">
+      <h2>Gửi yêu cầu hỗ trợ</h2>
+      <form id="supportForm">
+        <input type="text" placeholder="Họ và tên" required>
+        <input type="email" placeholder="Email" required>
+        <input type="text" placeholder="Số điện thoại" required>
+        <select required>
+          <option value="">Chọn danh mục</option>
+          <option>Thiết kế riêng</option>
+          <option>Đơn hàng</option>
+          <option>Góp ý</option>
+          <option>Khác</option>
+        </select>
+        <textarea rows="5" placeholder="Nội dung cần hỗ trợ" required></textarea>
+        <input type="file">
+        <label><input type="checkbox" required> Tôi đồng ý với chính sách bảo mật</label>
+        <button type="submit">Gửi yêu cầu</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="map">
+    <h2>Bản đồ</h2>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.123456!2d106.700000!3d10.776889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x123abc!2zQ8O0bmcgdHkgQ8O0bmc!5e0!3m2!1svi!2s!4v1612334567890" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  </div>
+
+  <div class="chat-widget">
+    <button onclick="window.open('https://m.me/tenpagefb', '_blank')">💬 Messenger</button>
+    <button onclick="window.open('https://zalo.me/123456789', '_blank')">💬 Zalo</button>
+  </div>
+
+  <script>
+    document.getElementById('supportForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi trong thời gian sớm nhất.');
+      this.reset();
+    });
+  </script>
+</body>
+</html>

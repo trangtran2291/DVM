@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thiết kế đồ bơi riêng</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .color-swatch {
+      width: 32px;
+      height: 32px;
+      border-radius: 9999px;
+      border: 2px solid #ccc;
+      cursor: pointer;
+    }
+    /* Header Styles */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #ffffff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+    }
+
+    header a {
+      text-decoration: none;
+      color: #2c3e50;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    header a:hover {
+      color: #3498db;
+    }
+
+    header nav a {
+      margin: 0 15px;
+      font-size: 16px;
+    }
+
+    header input[type="text"] {
+      padding: 8px 15px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    header input[type="text"]:focus {
+      border-color: #3498db;
+    }
+
+    header select {
+      padding: 5px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    body{
+      padding-top: 60px;
+    }
+  </style>
+</head>
+<!-- Header -->
+  <header>
+      <div><a href="/"><strong>LOGO</strong></a></div>
+      <input type="text" placeholder="Tìm kiếm..." />
+      <nav>
+      <a href="/">Trang chủ</a>
+      <a href="{{ url_for('custom_page') }}">Thiết kế riêng</a>
+      <a href="{{ url_for('lookbook') }}">Lookbook</a>
+      <a href="{{ url_for('contact') }}">Liên hệ</a>
+      </nav>
+
+      <div>
+      🛒 <a href="{{ url_for('cart') }}">Giỏ hàng</a> |
+      👤 <a href="/account">Tài khoản</a> |
+      <a href="{{ url_for('language') }}">Ngôn ngữ</a> |
+      🌐 <select><option>VNĐ</option><option>USD</option></select>
+      </div>
+  </header>
+<body class="bg-gray-50 text-gray-800">
+  <div class="container mx-auto px-4 py-6">
+    <!-- Main layout -->
+    <div class="flex flex-col lg:flex-row gap-8">
+      <!-- Product image -->
+      <div class="lg:w-1/2">
+        <div class="aspect-w-1 aspect-h-1">
+          <img id="mainImage" src="default-swimwear.jpg" alt="Mẫu đồ bơi" class="w-full h-auto object-cover rounded-xl shadow" />
+        </div>
+        <button class="mt-2 text-sm text-blue-600">Phóng to / Xem chi tiết</button>
+      </div>
+
+      <!-- Customization Panel -->
+      <div class="lg:w-1/2 bg-white p-6 rounded-xl shadow">
+        <h2 class="text-2xl font-semibold mb-4">Thiết kế đồ bơi của bạn</h2>
+
+        <!-- Kiểu dáng -->
+        <div class="mb-4">
+          <h3 class="font-semibold mb-2">✨ Chọn kiểu dáng:</h3>
+          <div class="flex flex-wrap gap-2">
+            <button class="px-3 py-1 bg-gray-200 rounded-full">Bikini</button>
+            <button class="px-3 py-1 bg-gray-200 rounded-full">One-piece</button>
+            <button class="px-3 py-1 bg-gray-200 rounded-full">Tankini</button>
+            <button class="px-3 py-1 bg-gray-200 rounded-full">High-waist</button>
+            <button class="px-3 py-1 bg-gray-200 rounded-full">Halter</button>
+            <button class="px-3 py-1 bg-gray-200 rounded-full">Cut-out</button>
+          </div>
+        </div>
+
+        <!-- Màu sắc / hoạ tiết -->
+        <div class="mb-4">
+          <h3 class="font-semibold mb-2">🎨 Màu sắc / hoạ tiết:</h3>
+          <div class="flex flex-wrap gap-2">
+            <div class="color-swatch bg-red-500"></div>
+            <div class="color-swatch bg-blue-500"></div>
+            <div class="color-swatch bg-green-500"></div>
+            <div class="color-swatch bg-yellow-400"></div>
+            <div class="color-swatch bg-pink-400"></div>
+          </div>
+        </div>
+
+        <!-- Size -->
+        <div class="mb-4">
+          <h3 class="font-semibold mb-2">📏 Chọn size:</h3>
+          <select class="w-full border p-2 rounded">
+            <option>XS</option>
+            <option>S</option>
+            <option>M</option>
+            <option>L</option>
+            <option>XL</option>
+            <option>Nhập số đo riêng</option>
+          </select>
+          <div class="mt-2 grid grid-cols-2 gap-2">
+            <input class="border p-1 rounded" placeholder="Ngực (cm)">
+            <input class="border p-1 rounded" placeholder="Eo (cm)">
+            <input class="border p-1 rounded" placeholder="Mông (cm)">
+            <input class="border p-1 rounded" placeholder="Chiều cao (cm)">
+          </div>
+        </div>
+
+        <!-- Personalization -->
+        <div class="mb-4">
+          <h3 class="font-semibold mb-2">✍️ Thêm tên / ký hiệu:</h3>
+          <input type="text" placeholder="Nhập tên hoặc ký hiệu" class="w-full border p-2 rounded" />
+        </div>
+
+        <!-- Chất liệu -->
+        <div class="mb-4">
+          <h3 class="font-semibold mb-2">📦 Chất liệu:</h3>
+          <select class="w-full border p-2 rounded">
+            <option>Cotton pha - Mềm mại, thoáng</option>
+            <option>Polyamide - Bền, nhẹ</option>
+            <option>Nylon tái chế - Thân thiện môi trường</option>
+          </select>
+        </div>
+
+        <!-- Giá & thời gian may -->
+        <div class="mb-4">
+          <p class="font-semibold">💸 Giá: <span class="text-red-500 font-bold">650.000đ</span></p>
+          <p>Thời gian may dự kiến: 4–6 ngày làm việc</p>
+        </div>
+
+        <!-- CTA -->
+        <button class="w-full bg-pink-500 text-white py-3 rounded-xl text-lg font-semibold hover:bg-pink-600">Đặt thiết kế này</button>
+      </div>
+    </div>
+
+    <!-- Mô tả chi tiết & hướng dẫn -->
+    <div class="mt-8 bg-white p-6 rounded-xl shadow">
+      <h3 class="text-xl font-semibold mb-4">Chi tiết sản phẩm & Hướng dẫn</h3>
+      <div class="space-y-2">
+        <details class="border rounded p-2">
+          <summary class="font-medium cursor-pointer">Mô tả chất liệu</summary>
+          <p>Các chất liệu được chọn lọc kỹ lưỡng, đảm bảo sự thoải mái & thời trang.</p>
+        </details>
+        <details class="border rounded p-2">
+          <summary class="font-medium cursor-pointer">Hướng dẫn chăm sóc</summary>
+          <p>Giặt tay bằng nước lạnh, tránh ánh nắng trực tiếp.</p>
+        </details>
+        <details class="border rounded p-2">
+          <summary class="font-medium cursor-pointer">Chính sách đổi trả</summary>
+          <p>Chấp nhận đổi size trong 3 ngày kể từ khi nhận hàng.</p>
+        </details>
+      </div>
+    </div>
+
+    <!-- Gợi ý thiết kế tương tự -->
+    <div class="mt-8">
+      <h3 class="text-xl font-semibold mb-4">👗 Gợi ý thiết kế tương tự</h3>
+      <div class="flex gap-4 overflow-x-auto">
+        <img src="suggestion1.jpg" class="w-32 h-40 rounded object-cover shadow" />
+        <img src="suggestion2.jpg" class="w-32 h-40 rounded object-cover shadow" />
+        <img src="suggestion3.jpg" class="w-32 h-40 rounded object-cover shadow" />
+      </div>
+    </div>
+
+    <!-- Hỗ trợ trực tiếp -->
+    <button class="fixed bottom-6 right-6 bg-blue-500 text-white p-4 rounded-full shadow-lg hover:bg-blue-600">
+      💬
+    </button>
+  </div>
+</body>
+</html>
